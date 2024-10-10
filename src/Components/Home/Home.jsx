@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
-import r2 from '../images/r2.png'
+import React, { useEffect, Suspense } from 'react'
 import './Home.css'
 import Carousel from './Carousel'
 import Carousel2 from './Carousel2'
 import Carousel3 from './Carousel3'
+import r2 from '../images/r2.png'
 import t1 from '../images/t1.jpg'
 import o1 from '../images/o1.jpg'
 import o2 from '../images/o2.jpeg'
@@ -31,46 +31,23 @@ import v5 from '../videos/v5.mp4'
 import v6 from '../videos/v6.mp4'
 import clock from '../images/clock.webp'
 import mus from '../images/mus.jpg'
+import { useTranslation } from 'react-i18next'
+import Header from './Header'
 
- 
 const Home = () => {
+    const { t, i18n } = useTranslation();
+    const languages = localStorage.getItem('i18nextLng');
+    const handleChange = (event) => {
+        const selectedLanguage = event.target.value;
+        i18n.changeLanguage(selectedLanguage);
+        localStorage.setItem('i18nextLng', selectedLanguage);
+    }
 
     return (
-        <div className='site max-w-[1920px] w-full h-auto bg-white border-4 border-fuchsia-900 m-auto '>
+        <div className='site w-full h-auto bg-white border-4 border-fuchsia-900 m-auto '>
 
-            <div className="nav-hold max-w-[1920px] w-full h-auto fixed bg-white z-10 mt-[-5px] border-2 border-red-700 ">
-
-                <div    data-aos="fade-up" className='navbar max-w-[1300px] w-full h-20 border-2 border-red-500 m-auto flex flex-row items-center justify-between my-2 '>
-
-                    <a className='nav-href' href="">
-                        <img className='nav-img w-[100px]' src={r2} />
-                    </a>
-
-                    <ul className="menu h-auto flex uppercase font-bold text-[14px] gap-8 ml-auto mr-[30px] font-sans ">
-                        <li className='nav-link relative cursor-pointer '>
-                            <a href='#about' className='router-link-active router-link-exact-active text-black hover:text-red-800 relative '>about</a>
-                        </li>
-                        <li className='nav-link relative cursor-pointer  '>
-                            <a href='#countries' className='router-link-active router-link-exact-active text-black hover:text-red-800 relative '>countries</a>
-                        </li>
-                        <li className='nav-link relative cursor-pointer  '>
-                            <a href='#works' className='router-link-active router-link-exact-active text-black hover:text-red-800 relative '>our works</a>
-                        </li>
-                        <li className='nav-link relative cursor-pointer  '>
-                            <a href='#services' className='router-link-active router-link-exact-active text-black hover:text-red-800 relative '>services</a>
-                        </li>
-                        <li className='nav-link relative cursor-pointer  '>
-                            <a href='#contact' className='router-link-active router-link-exact-active text-black hover:text-red-800 relative '>contact</a>
-                        </li>
-                        <select className='outline-none text-white bg-black '>
-                            <option value="RU">RU</option>
-                            <option value="EN">EN</option>
-                            <option value="UZ">UZ</option>
-                        </select>
-                    </ul>
-
-                </div>
-
+            <div>
+                <Header/>
             </div>
 
             <div className="carousel bg-none">
@@ -83,7 +60,7 @@ const Home = () => {
 
                     <div className="popular-inside max-w-[1300px] w-full h-auto border-2 border-yellow-500 m-auto flex flex-col gap-2 ">
                         <h3 className='text-[50px] font-sans text-left font-bold'>
-                            Populars
+                            {t('Populars')}
                         </h3>
                         <span class="animate-linear-1 block w-[48px] h-[5px] bg-[#f00] mr-16 "></span>
                         <div className='carousel2 border-2 border-emerald-800'>
@@ -95,7 +72,7 @@ const Home = () => {
 
                 <div className="container max-w-[1920px] w-full h-auto mt-[50px] px-[15px] border-2 border-y-red-600 ">
 
-                    <div className="conatiner-flex m-auto max-w-[1270px] w-full h-auto flex flex-row justify-between border-2 border-gray-900 flex-wrap ">
+                    <div className="conatiner-flex m-auto max-w-[1270px] w-full h-auto flex flex-row justify-between flex-wrap max-desktop:justify-center gap-10 border-2 border-gray-900 ">
 
                         <div className='conatiner-left flex flex-col justify-center '>
 
@@ -133,11 +110,15 @@ const Home = () => {
 
                 <div className='coutries-con m-auto max-w-[1300px] w-full h-auto px-4 '>
 
-                    <h3 className='text-[50px] font-sans font-bold text-black  '>Countries</h3>
+                    <div data-aos="fade-right">
 
-                    <span class="animate-linear-1 mt-[5px] block w-[48px] h-[5px] bg-[#f00]"></span>
+                        <h3 className='text-[50px] font-sans font-bold text-black  '>Countries</h3>
 
-                    <div className='countries-places max-w-[1300px] w-full h-auto border-2 border-fuchsia-800 mt-10 flex flex-wrap gap-[30px] justify-center justify-between '>
+                        <span class="animate-linear-1 mt-[5px] block w-[48px] h-[5px] bg-[#f00]"></span>
+
+                    </div>
+
+                    <div className='countries-places max-w-[1300px] w-full h-auto border-2 border-fuchsia-800 mt-10 flex flex-wrap gap-[30px] justify-center justify-between max-middle:justify-evenly '>
 
                         <div data-aos="zoom-in" className="countries-card1 max-w-[350px] w-full h-auto flex flex-col ">
                             <img className='object-cover h-full rounded-t-3xl ' src={o1} />
@@ -230,11 +211,15 @@ const Home = () => {
 
                 <div className="works-con max-w-[1300px] w-full h-auto m-auto border-2 border-fuchsia-700 flex flex-col ">
 
-                    <h3 className='text-[50px] font-sans text-black font-bold '>Excursion</h3>
+                    <div data-aos="fade-right" class="aos-init aos-animate">
 
-                    <span class="animate-linear-1 mt-[5px] block w-[48px] h-[5px] bg-[#f00]"></span>
+                        <h3 className='text-[50px] font-sans text-black font-bold '>Excursion</h3>
 
-                    <div className="movie-cards max-w-[1300px] w-full h-auto p-4 flex flex-row justify-between ">
+                        <span class="animate-linear-1 mt-[5px] block w-[48px] h-[5px] bg-[#f00]"></span>
+
+                    </div>
+
+                    <div className="movie-cards max-w-[1300px] w-full h-auto p-4 flex flex-row justify-between flex-wrap ">
 
                         <div className="moviecard1 max-w-[300px] w-full h-auto p-1 bg-white mx-auto">
                             <div className="overplay relative">
@@ -259,17 +244,26 @@ const Home = () => {
 
                     </div>
 
-                    <h3 className='text-[50px] font-sans text-black font-bold mt-[50px] '>Client Reviews</h3>
+                    <div data-aos="fade-right" class="aos-init aos-animate">
 
-                    <span class="animate-linear-1 mt-[5px] block w-[48px] h-[5px] bg-[#f00]"></span>
+                        <h3 className='text-[50px] font-sans text-black font-bold mt-[50px] '>Client Reviews</h3>
 
-                    <div className="movie-cards2 max-w-[1300px] w-full h-auto p-4 flex flex-row justify-between ">
+                        <span class="animate-linear-1 mt-[5px] block w-[48px] h-[5px] bg-[#f00]"></span>
 
-                        <div className="moviecard4 max-w-[300px] w-full h-auto p-1 bg-white mx-auto">
+                    </div>
+
+                    <div className="movie-cards2 max-w-[1300px] w-full h-auto p-4 flex flex-row justify-between flex-wrap ">
+
+                        <div className="moviecard4 max-w-[300px] w-full h-auto p-1 bg-white mx-auto ">
+
                             <div className="overplay relative">
+
                                 <img className='absolute max-w-[100px] w-full h-auto top-[-20px] left-[-25px] ' src={r2} />
+
                                 <video controls className='max-w-[300px] w-full h-auto rounded-2xl shadow-lg mx-auto ' src={v4}></video>
+
                             </div>
+
                         </div>
 
                         <div className="moviecard5 max-w-[300px] w-full h-auto p-1 bg-white mx-auto">
@@ -290,17 +284,26 @@ const Home = () => {
 
                 </div>
 
-                <div className="prioritet max-w-[1920px] w-full h-auto border-2 border-violet-800 pt-[70px] pb-[150px] bg-gray-800 ">
+                <div className="prioritet max-w-[1920px] w-full h-auto border-2 border-violet-800 pt-[70px] pb-[150px]  ">
 
                     <div className="prioritet-con max-w-[1300px] w-full h-auto border-2 border-teal-500 m-auto flex flex-col px-[100px] ">
 
-                        <h3 className='text-[50px] text-white mt-[50px] font-sans font-bold text-center '>Priorities in Tourism and Visas</h3>
+                        <div data-aos="fade-right" className='aos-init aos-animate'>
 
-                        <span class="animate-linear-1 m-auto mt-[5px] block w-[48px] h-[5px] bg-[#f00]"></span>
+                            <h3 className='text-[50px] text-white mt-[50px] font-sans font-bold text-center '>Priorities in Tourism and Visas</h3>
 
-                        <h5 className='text-[17px] text-white font-bold text-center mt-5 '>We provide a high level of service and reliability in obtaining tourist visas. Our team has experience in the tourism industry and is ready to quickly resolve issues related to obtaining visas. We strive to make our clients' travels comfortable and carefree, providing support at every stage—from choosing a visa to obtaining documentation.</h5>
+                            <span class="animate-linear-1 m-auto mt-[5px] block w-[48px] h-[5px] bg-[#f00]"></span>
 
-                        <div className='prioritet-con2 max-w-[1260px] w-full h-auto border-2 border-red-600 pt-20 flex flex-row justify-between '>
+                        </div>
+
+
+                        <div data-aos="zoom in" className='aos-init aos-animate'>
+
+                            <h5 className='text-[17px] text-white font-bold text-center mt-5 '>We provide a high level of service and reliability in obtaining tourist visas. Our team has experience in the tourism industry and is ready to quickly resolve issues related to obtaining visas. We strive to make our clients' travels comfortable and carefree, providing support at every stage—from choosing a visa to obtaining documentation.</h5>
+
+                        </div>
+
+                        <div data-aos="zoom in" className='prioritet-con2 max-w-[1260px] w-full h-auto border-2 border-red-600 pt-20 flex flex-row justify-between aos-init aos-animate '>
 
                             <div className="pr-card1 max-w-[220px] w-full h-auto border-2 border-fuchsia-600 flex flex-col text-white gap-5 items-center ">
                                 <img className='max-w-[135px] w-full max-h-[135px] h-full ' src={clock} />
@@ -319,7 +322,7 @@ const Home = () => {
                                 <h2 className='text-[15px] font-bold '>Support</h2>
                             </div>
 
-                            <div className="pr-card1 max-w-[220px] w-full h-auto border-2 border-fuchsia-600 flex flex-col text-white gap-5 items-center ">
+                            <div className="pr-card4 max-w-[220px] w-full h-auto border-2 border-fuchsia-600 flex flex-col text-white gap-5 items-center ">
                                 <svg className='max-w-[135px] w-full max-h-[135px] h-full' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="#ffffff" d="M275.5 6.6C278.3 2.5 283 0 288 0s9.7 2.5 12.5 6.6L366.8 103C378 119.3 384 138.6 384 158.3l0 1.7c0 53-43 96-96 96s-96-43-96-96l0-1.7c0-19.8 6-39 17.2-55.3L275.5 6.6zM568.2 336.3c13.1 17.8 9.3 42.8-8.5 55.9L433.1 485.5c-23.4 17.2-51.6 26.5-80.7 26.5L192 512 32 512c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l36.8 0 44.9-36c22.7-18.2 50.9-28 80-28l78.3 0 16 0 64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0-16 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l120.6 0 119.7-88.2c17.8-13.1 42.8-9.3 55.9 8.5zM193.6 384c0 0 0 0 0 0l-.9 0c.3 0 .6 0 .9 0z" /></svg>
                                 <h2 className='text-[15px] font-bold '>Convenience</h2>
                             </div>
@@ -329,30 +332,32 @@ const Home = () => {
 
                         <div className="pr-numbers max-w-[970px] w-full h-auto relative border-2 border-red-600 m-auto mt-[100px] rounded-3xl bg-pink-900 ">
 
-                            <h1 className='text-[50px] text-white font-bold text-center '>We in Numbers</h1>
+                            <div data-aos="fade-up" className="aos-init aos-animate">
 
-                            <span class="animate-linear-1 m-auto mt-[5px] block w-[48px] h-[5px] bg-[#fff]"></span>
+                                <h1 className='text-[50px] text-white font-bold text-center '>We in Numbers</h1>
+
+                                <span class="animate-linear-1 m-auto mt-[5px] block w-[48px] h-[5px] bg-[#fff]"></span>
+
+                            </div>
 
                             <div className="nums flex flex-row max-w-[970px] w-full h-auto text-white border-2 border-white justify-between pb-5 ">
 
-                                <div className="num-card1 border-2 border-amber-500 gap-[20px] flex flex-col ">
+                                <div data-aos="zoom-in" className="num-card1 border-2 border-amber-500 gap-[20px] flex flex-col aos-init aos-animate ">
                                     <h1 className='text-[100px] font-sans font-bold '>7320</h1>
                                     <h5 className='text-center font-bold text-[16px] uppercase '>Issued Visas</h5>
                                 </div>
 
-                                <div className="num-card2 border-2 border-amber-500 gap-[20px] flex flex-col ">
+                                <div data-aos="zoom-in" className="num-card2 border-2 border-amber-500 gap-[20px] flex flex-col aos-init aos-animate ">
                                     <h1 className='text-[100px] font-sans font-bold '>7257</h1>
                                     <h5 className='text-center font-bold text-[16px] uppercase '>Successful Trips</h5>
                                 </div>
 
-                                <div className="num-card3 border-2 border-amber-500 gap-[20px] flex flex-col ">
+                                <div data-aos="zoom-in" className="num-card3 border-2 border-amber-500 gap-[20px] flex flex-col aos-init aos-animate ">
                                     <h1 className='text-[100px] font-sans font-bold '>7250</h1>
                                     <h5 className='text-center font-bold text-[16px] uppercase '>Satisfied Clients</h5>
                                 </div>
 
                             </div>
-
-                            <div class="bg-[#f00] absolute w-full h-[3px] mt-[100px] bottom-[-55px]"></div>
 
                         </div>
 
@@ -366,15 +371,19 @@ const Home = () => {
 
                 <div className="services-con m-auto max-w-[1300px] w-full h-auto border-2 border-teal-700 ">
 
-                    <h3 className='text-[50px] text-black font-bold font-sans '>Services</h3>
+                    <div data-aos="fade-right">
 
-                    <span class="animate-linear-1 mt-[5px] block w-[48px] h-[5px] bg-[#f00]"></span>
+                        <h3 className='text-[50px] text-black font-bold font-sans '>Services</h3>
+
+                        <span class="animate-linear-1 mt-[5px] block w-[48px] h-[5px] bg-[#f00]"></span>
+
+                    </div>
 
                     <div className="btn-con flex flex-row justify-between mt-[15px] ">
 
-                        <a href='#t1' data-aos="zoom-in" class="btn-u w-[200px] leading-none text-center text-[15px] px-4 py-3 m-1 border-none rounded-md cursor-pointer bg-[#292D31] text-white transition-colors duration-300 ease-in-out hover:bg-[#f00] active aos-init aos-animate">Visa Consultations</a>
+                        <button data-aos="zoom-in" class="btn-u w-[200px] leading-none text-center text-[15px] px-4 py-3 m-1 border-none rounded-md cursor-pointer bg-[#292D31] text-white transition-colors duration-300 ease-in-out hover:bg-[#f00] active aos-init aos-animate">Visa Consultations</button>
 
-                        <a href='#t2' data-aos="zoom-in" class="btn-u w-[200px] leading-none text-center text-[15px] px-4 py-3 m-1 border-none rounded-md cursor-pointer bg-[#292D31] text-white transition-colors duration-300 ease-in-out hover:bg-[#f00] aos-init aos-animate">Tourist Visas</a>
+                        <button data-aos="zoom-in" class="btn-u w-[200px] leading-none text-center text-[15px] px-4 py-3 m-1 border-none rounded-md cursor-pointer bg-[#292D31] text-white transition-colors duration-300 ease-in-out hover:bg-[#f00] aos-init aos-animate">Tourist Visas</button>
 
                         <button data-aos="zoom-in" class="btn-u w-[200px] leading-none text-center text-[15px] px-4 py-3 m-1 border-none rounded-md cursor-pointer bg-[#292D31] text-white transition-colors duration-300 ease-in-out hover:bg-[#f00] aos-init aos-animate">Business Visas</button>
 
@@ -388,9 +397,9 @@ const Home = () => {
 
                     <article className='px-[10px] py-[15px] '>
 
-                        <div class="block-red-txt ml-[50px] bg-[#f00] w-[5px] h-[50px]" data-v-a479bf36></div>
+                        <div class="block-red-txt ml-[50px] bg-[#f00] w-[5px] h-[50px]"></div>
 
-                        <h3 id='t1' className='ml-[50px] text-black text-[18px] mt-[15px] font-mono font-bold '>EASY VISA CONSULTING specialists provide detailed consultations on visa applications for countries such as Schengen, Canada, the USA, the United Kingdom, Japan, and Korea. We explain all the nuances of document submission and help you prepare for the process.</h3>
+                        <h3 className='ml-[50px] text-black text-[18px] mt-[15px] font-mono font-bold '>EASY VISA CONSULTING specialists provide detailed consultations on visa applications for countries such as Schengen, Canada, the USA, the United Kingdom, Japan, and Korea. We explain all the nuances of document submission and help you prepare for the process.</h3>
 
                         {/* <h3 id='t2' className='ml-[50px] text-black text-[18px] mt-[15px] '>We assist in obtaining tourist visas for comfortable travel to popular countries, including Europe, North America, and Asia. Our experts provide full support at every stage.</h3> */}
 
@@ -401,9 +410,19 @@ const Home = () => {
                 <div className="work mt-20 max-w-[1920px] w-full h-auto border-2 border-yellow-400 bg-green-950 ">
 
                     <div className="work-swp max-w-[1300px] w-full h-auto border-2 border-white m-auto ">
-                        <h3 className='text-[50px] text-white font-bold font-sans '>Travels</h3>
-                        <span class="animate-linear-1 mt-[5px] block w-[48px] h-[5px] bg-[#f00] mb-[25px]"></span>
-                        <Carousel3 />
+
+                        <div data-aos='fade-right' className='aos-init aos-animate'>
+
+                            <h3 className='text-[50px] text-white font-bold font-sans '>Travels</h3>
+
+                            <span class="animate-linear-1 mt-[5px] block w-[48px] h-[5px] bg-[#f00] mb-[25px]"></span>
+
+                        </div>
+
+                        <div class="carousel aos-init aos-animate" data-aos="zoom-in">
+                            <Carousel3 />
+                        </div>
+
                     </div>
 
                 </div>
@@ -413,15 +432,20 @@ const Home = () => {
 
             <div id='contact' className="contact max-w-[1920px] w-full h-auto bg-black pt-20 ">
 
-                <div className="contact-con max-w-[1300px] w-full h-auto m-auto border-2 border-red-800 flex flex-row px-[10px] justify-between ">
+                <div className="contact-con max-w-[1300px] w-full h-auto m-auto border-2 border-red-800 flex flex-row px-[10px] justify-between flex-wrap ">
 
                     <div className="contact-left text-left text-white ">
 
-                        <h3 className='font-bold font-sans text-[50px] '>Contact</h3>
+                        <div className='aos-init aos-animate' data-aos='fade-right'>
 
-                        <span class="animate-linear-1 mt-[5px] block w-[48px] h-[5px] bg-[#f00]"></span>
+                            <h3 className='font-bold font-sans text-[50px] '>Contact</h3>
 
-                        <h5 className='text-[18px] font-sans mt-[35px] '>For contact:</h5>
+                            <span class="animate-linear-1 mt-[5px] block w-[48px] h-[5px] bg-[#f00]"></span>
+
+                            <h5 className='text-[18px] font-sans mt-[35px] '>For contact:</h5>
+
+                        </div>
+
 
                         <ul className='mt-[15px]'>
 
@@ -490,7 +514,7 @@ const Home = () => {
 
                     </div>
 
-                    <div class="contact-map max-w-[450px] w-full h-auto  aos-init aos-animate" data-aos="zoom-in">
+                    <div class="contact-map max-w-[450px] w-full h-auto  aos-init aos-animate max-middle:max-w-[350px] max-middle:max-h-[500px] " data-aos="zoom-in">
 
                         <img className='max-w-[450px] w-full max-h-[550px] h-full rounded-2xl ' src={mus} />
 
@@ -509,6 +533,7 @@ const Home = () => {
                         <textarea required class="user-text h-[175px] text-[#222221] bg-white py-[10px] pl-[20px] outline-none aos-init aos-animate" name="comment" cols="30" rows="10" placeholder="Comments" data-aos="fade-left"></textarea>
 
                         <button type="submit" class="bg-[#D5192F] rounded-lg py-[10px] text-white font-bold transition-all hover:bg-white hover:text-[#D5192F] mt-2">Submit a request</button>
+                        <h1>erger</h1>
 
                     </div>
 

@@ -1,4 +1,3 @@
- 
 import React, { useEffect } from 'react'
 import Home from './Components/Home/Home'
 import AOS from "aos";
