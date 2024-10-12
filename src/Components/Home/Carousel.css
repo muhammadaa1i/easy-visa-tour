@@ -18,6 +18,7 @@
   .swiper {
     width: 100%;
     height: 100%;
+    overflow: hidden;
   }
   
   .swiper-slide {
@@ -68,3 +69,15 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
+
+  .mySwiper {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.swp1, .swp2, .swp3 {
+    width: 100vw;
+    height: 90vh; 
+    overflow: hidden;
+}
