@@ -6,12 +6,15 @@ export default {
   ],
   theme: {
     screens: {
-      'big':'1475px',
-      'desktop': '1220px',
-      'middle':'1160px',
-      'laptop': '1024px',
-      'min-tablet':'768px',
-      'tablet': '640px', 
+      'p1920':'1920px',
+      'p1475':'1475px',
+      'p1320':'1320px',
+      'p1220': '1220px',
+      'p1160':'1160px',
+      'p1024': '1024px',
+      'p992':'992px',
+      'p768':'768px',
+      'p640': '640px', 
 
     },
     extend: {},

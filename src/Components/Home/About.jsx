@@ -1,7 +1,6 @@
-import { useEffect } from "react";
 import Carousel2 from './Carousel2'
 import { useTranslation } from "react-i18next";
-import t1 from '../images/t1.jpg'
+import './About.css'
 import r2 from '../images/r2.png'
 
 const About = () => {
@@ -27,7 +26,7 @@ const About = () => {
 
             <div className="container max-w-[1920px] w-full h-auto mt-[50px] px-[15px] border-2 border-y-red-600 ">
 
-                <div className="conatiner-flex m-auto max-w-[1270px] w-full h-auto flex flex-row justify-between flex-wrap max-desktop:justify-center gap-10 border-2 border-gray-900 ">
+                <div className="conatiner-flex m-auto max-w-[1270px] w-full h-auto flex flex-row justify-between flex-wrap gap-[10px] p1320:gap-5 border-2 border-gray-900 ">
 
                     <div className='conatiner-left flex flex-col justify-center '>
 
@@ -51,7 +50,7 @@ const About = () => {
 
                     </div>
 
-                    <div style={{ backgroundImage: `url(${t1})`, backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', maxWidth: '600px', width: '100%', minHeight: '600px', borderRadius: '24px' }} className='container-img flex items-end '>
+                    <div className='container-img flex items-end '>
                         <img className='max-w-[250px] w-full h-auto ' src={r2} />
                     </div>
 
